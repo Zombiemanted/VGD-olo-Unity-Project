@@ -6,6 +6,9 @@ TagManager:
   tags:
   - InstantDeath
   - InteractableItem
+  - Hazard
+  - HealthPickup
+  - BasicEnemy
   layers:
   - Default
   - TransparentFX

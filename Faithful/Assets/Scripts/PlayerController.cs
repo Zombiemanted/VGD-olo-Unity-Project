@@ -1,4 +1,5 @@
 using NUnit.Framework.Constraints;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using Unity.Collections;
 using Unity.Hierarchy;
@@ -12,18 +13,18 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     Camera playerCam;
     public Vector3 respawn;
-    public float dist = .5f; //groundDetectionLength
+    
     Ray ray;
-    RaycastHit hit;
 
     public float ForwardBackNow; //vert
     public float SidewaysNow; //horiz
 
     public float ishowspeed = 10f; //you'll never guess
     public float howMuchBoof = 10f; //jump power
+    public float dist = 1f; //groundDetectionLength
 
     public int healthy = 5;
-    public int maxHealthy = 10;
+    public int maxHealthy = 7;
 
     public void Start()
     {
@@ -40,12 +41,11 @@ public class PlayerController : MonoBehaviour
     {
         if (healthy <= 0) //Can i nest logic please
         {
-            print("GameOverLol"); //memory managers be damned im adding like 2 bytes
-            transform.position = respawn;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //take it off
             healthy = 5; //maxhealthy is only achieved via items Dingleberry
         }
 
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //Reloads scene
+        // transform.position = respawn;
 
         //this moves my camera
         Quaternion playerRotation = playerCam.transform.rotation;
@@ -72,10 +72,10 @@ public class PlayerController : MonoBehaviour
         ForwardBackNow = inputAxis.y;
         SidewaysNow = inputAxis.x;
     }
-    public void Jump() //take another wild fucking guess
+    public void Jump() //take another wild fucking guess (it also doesnt work)
     {
         if (Physics.Raycast(ray,dist))
-            rb.AddForce(transform.up * howMuchBoof);
+            rb.AddForce(transform.up * howMuchBoof, ForceMode.Impulse);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -83,6 +83,19 @@ public class PlayerController : MonoBehaviour
         {
             healthy = 0;
         }
-        
+        if ((other.tag == "HealthPickup") && (healthy < maxHealthy))
+        {
+            healthy++;
+            //Destroy(other.gameObject);
+        }
+        if (other.tag == "Hazard")
+        {
+            healthy--;
+            //Destroy(other.gameObject);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        //if (collision.gameObject.Tag == "hazard")
     }
 }
