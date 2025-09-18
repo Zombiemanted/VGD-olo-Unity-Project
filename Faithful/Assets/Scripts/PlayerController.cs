@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (healthy <= 0) //Can i nest logic please
+        if (healthy <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //take it off
             healthy = 5; //maxhealthy is only achieved via items Dingleberry
@@ -96,6 +96,6 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.Tag == "hazard")
+        //if (collision.gameObject.Tag == "Hazard")
     }
 }
