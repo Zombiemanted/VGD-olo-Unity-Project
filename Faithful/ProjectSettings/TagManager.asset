@@ -9,6 +9,8 @@ TagManager:
   - Hazard
   - HealthPickup
   - BasicEnemy
+  - Projectile
+  - Weapon
   layers:
   - Default
   - TransparentFX
