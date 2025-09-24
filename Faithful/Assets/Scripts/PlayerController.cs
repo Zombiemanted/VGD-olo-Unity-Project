@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     public float jumpHeight = 10f;
     public float groundDetectLength = .5f;
-    public float interactDistance = 1f;
+    public float interactDistance = 10f;
 
     public int health = 5;
     public int maxHealth = 7;
@@ -103,8 +103,9 @@ public class PlayerController : MonoBehaviour
     }
     public void Reload()
     {
-        if (currentWeapon)
-            currentWeapon.reload();
+       /* if (currentWeapon)
+            if (!currentWeapon.reloading)
+                currentWeapon.reload();*/
     }
     public void Interact()
     {
