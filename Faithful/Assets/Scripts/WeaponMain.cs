@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class Weapon : MonoBehaviour
+public class WeaponMain : MonoBehaviour
 {
     PlayerController player;
 
@@ -14,6 +14,8 @@ public class Weapon : MonoBehaviour
 
     [Header("Meta Attributes")]
     public bool canFire = true;
+    public bool reloading = false;
+    public bool holdToAttack = true;
     public int weaponID;
     public string weaponName;
 

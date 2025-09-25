@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Sniper : Weapon
+public class Sniper : WeaponMain
 {
-    public void toggleFireMode()
+    public void changeFireMode()
     {
         currentFireMode++;
 

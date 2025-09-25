@@ -11,6 +11,9 @@ TagManager:
   - BasicEnemy
   - Projectile
   - Weapon
+  - ui_health
+  - PlayerObj
+  - Pause
   layers:
   - Default
   - TransparentFX

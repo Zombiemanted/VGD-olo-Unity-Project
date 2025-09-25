@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     public PlayerInput input;
     public Transform weaponSlot;
-    public Weapon currentWeapon;
+    public WeaponMain currentWeapon;
 
     float verticalMove;
     float horizontalMove;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public int health = 5;
     public int maxHealth = 7;
 
+    public bool attacking = false;
 
     public void Start()
     {
@@ -69,13 +70,14 @@ public class PlayerController : MonoBehaviour
             if (interactHit.collider.gameObject.tag == "weapon")
             {
                 pickupObj = interactHit.collider.gameObject;
-                Debug.Log("FOUND");
             }
-
-            Debug.Log(interactHit.collider.gameObject.tag);
         }
         else
             pickupObj = null;
+
+        if (currentWeapon)
+            if (currentWeapon.holdToAttack && attacking)
+                currentWeapon.fire();
 
         rb.linearVelocity = (temp.x * transform.forward) +
                             (temp.y * transform.up) +
@@ -93,29 +95,58 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(jumpRay, groundDetectLength))
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
     }
-    public void Attack()
+    public void fireModeSwitch()
     {
-
+        if (currentWeapon.weaponID == 1)
+        {
+            currentWeapon.GetComponent<Sniper>().changeFireMode();
+        }
+    }
+    public void Attack(InputAction.CallbackContext context)
+    {
         if (currentWeapon)
         {
-            currentWeapon.fire();
+            if (currentWeapon.holdToAttack)
+            {
+                if (context.ReadValueAsButton())
+                    attacking = true;
+                else
+                    attacking = false;
+            }
+
+            else
+                if (context.ReadValueAsButton())
+                currentWeapon.fire();
         }
     }
     public void Reload()
     {
-       /* if (currentWeapon)
+        if (currentWeapon)
             if (!currentWeapon.reloading)
-                currentWeapon.reload();*/
+                currentWeapon.reload();
     }
     public void Interact()
     {
         if (pickupObj)
         {
             if (pickupObj.tag == "Weapon")
-                pickupObj.GetComponent<Weapon>().equip(this);
+            {
+                if (currentWeapon)
+                    DropWeapon();
+
+                pickupObj.GetComponent<WeaponMain>().equip(this);
+            }
+            pickupObj = null;
         }
         else
             Reload();
+    }
+    public void DropWeapon()
+    {
+        if (currentWeapon)
+        {
+            currentWeapon.GetComponent<WeaponMain>().unequip();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
