@@ -12,15 +12,14 @@ using UnityEngine.AI;
 public class BasicEnemyController : MonoBehaviour
 {
     //Script is a lie this is just my bullethell controller (Using a waypoint system itll send out Things.. Dodge them)
-    NavMeshAgent agent;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+
     }
 
     void Update()
     {
-        agent.destination = GameObject.Find("Player").transform.position;
+
     }
 }

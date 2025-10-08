@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 5f;
     public float jumpHeight = 10f;
-    public float groundDetectLength = .5f;
+    public float groundDetectLength = 1.1f;
     public float interactDistance = 10f;
 
     public int health = 5;
