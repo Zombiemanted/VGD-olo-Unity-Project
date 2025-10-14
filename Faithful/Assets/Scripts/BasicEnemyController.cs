@@ -12,10 +12,11 @@ using UnityEngine.AI;
 public class BasicEnemyController : MonoBehaviour
 {
     //Script is a lie this is just my bullethell controller (Using a waypoint system itll send out Things.. Dodge them)
-
+    Animator myAnim;
     void Start()
     {
-
+        myAnim = GetComponent<Animator>();
+        //if myAnim.SetBool("isAttacking", true); else stop agent myAnim.SetBool("isAttacking",false);
     }
 
     void Update()
