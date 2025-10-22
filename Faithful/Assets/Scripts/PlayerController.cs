@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     float horizontalMove;
 
     public float speed = 5f;
-    public float jumpHeight = 10f;
+    public float jumpHeight = 5f;
     public float groundDetectLength = 1.1f;
     public float interactDistance = 10f;
 
@@ -94,6 +94,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics.Raycast(jumpRay, groundDetectLength))
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+        Debug.Log("Jumping");
+
     }
     public void fireModeSwitch()
     {
