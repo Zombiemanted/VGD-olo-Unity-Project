@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     float horizontalMove;
 
     public float speed = 5f;
-    public float jumpHeight = 5f;
+    public float jumpHeight = 3.5f;
     public float groundDetectLength = 1.1f;
     public float interactDistance = 10f;
 
